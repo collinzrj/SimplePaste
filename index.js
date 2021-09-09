@@ -1,6 +1,10 @@
 const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+var fs = require('fs');
+var privateKey  = fs.readFileSync('privkey.pem', 'utf8');
+var certificate = fs.readFileSync('fullchain.perm', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+const https = require('https').Server(credentials, app);
+const io = require('socket.io')(https);
 const port = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
@@ -13,6 +17,6 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(port, () => {
-  console.log(`Socket.IO server running at http://0.0.0.0:${port}/`);
+https.listen(port, () => {
+  console.log(`Socket.IO server running at https://0.0.0.0:${port}/`);
 });
