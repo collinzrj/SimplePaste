@@ -10,13 +10,17 @@
       #input:focus { outline: none; }
       #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
 
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin-bottom: 10rem; padding: 0;}
       #messages > li { padding: 0.5rem 1rem; }
       #messages > li:nth-child(odd) { background: #efefef; }
     </style>
   </head>
   <body>
-    <ul id="messages"></ul>
+    <ul id="messages">
+      <% for (var i = 0; i < items.length ; i++) { %>
+        <li><pre><%= items[i] %></pre></li>
+      <% } %>
+    </ul>
     <form id="form" action="">
       <!-- <input id="input" autocomplete="off" /><button>Send</button> -->
       <textarea id="input" overflow-y="scroll" height="10rem"></textarea><button>Send</button>
