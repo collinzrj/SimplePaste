@@ -5,7 +5,7 @@ var certificate = fs.readFileSync('fullchain.pem', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 const https = require('https').Server(credentials, app);
 const io = require('socket.io')(https);
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 443;
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
