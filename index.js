@@ -1,7 +1,7 @@
 const app = require('express')();
 var fs = require('fs');
 var privateKey  = fs.readFileSync('privkey.pem', 'utf8');
-var certificate = fs.readFileSync('fullchain.perm', 'utf8');
+var certificate = fs.readFileSync('fullchain.pem', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 const https = require('https').Server(credentials, app);
 const io = require('socket.io')(https);
