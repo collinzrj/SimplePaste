@@ -16,6 +16,12 @@
     </style>
   </head>
   <body>
+    <form action="/upload" enctype="multipart/form-data" method="post">
+      <div class="form-group">
+        <input type="file" class="form-control-file" name="uploaded_file">
+        <input type="submit" value="Submit" class="btn btn-default">            
+      </div>
+    </form>
     <ul id="messages">
       <% for (var i = 0; i < items.length ; i++) { %>
         <li><pre><%= items[i] %></pre></li>
