@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-var useHTTPS = true;
+var useHTTPS = false;
 var server;
 if (useHTTPS) {
   var privateKey  = fs.readFileSync('privkey.pem', 'utf8');
@@ -12,7 +12,6 @@ if (useHTTPS) {
   server = require('http').Server(app);
 }
 const io = require('socket.io')(server);
-
 const multer = require('multer');
 const port = process.env.PORT || 443;
 const storage = multer.diskStorage({
@@ -31,6 +30,10 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
 app.use(express.static('files'))
+
+if (!fs.existsSync('files')) {
+  fs.mkdirSync('files')
+}
 
 app.get('/', (req, res) => {
   var messages = [];
